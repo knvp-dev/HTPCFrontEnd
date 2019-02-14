@@ -16,16 +16,16 @@ function createWindow() {
   splash.loadFile("app/splash.html");
 
   win = new BrowserWindow({
-    width: 1920,
-    height: 1080,
+    width: 500,
+    height: 500,
     frame: false,
     show: false,
     webPreferences: {
-      devTools: false,
+      devTools: true,
       nodeIntegration: true
     }
   });
-  win.setFullScreen(true);
+  win.setFullScreen(false);
   win.loadFile("app/index.html");
   win.on("closed", () => {
     win = null;

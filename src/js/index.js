@@ -38,7 +38,7 @@ const app = new Vue({
     },
     handleControllerConnectionChange() {
       this.device = this.deviceList.length > 0 ? this.deviceList[0] : [];
-      Event.$emit("device-list-updated", { devicelist: this.deviceList });
+      //Event.$emit("device-list-updated", { devicelist: this.deviceList });
       this.deviceList.length == 0
         ? this.controllerConnectionLost()
         : this.setUpController();

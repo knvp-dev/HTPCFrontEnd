@@ -25,7 +25,6 @@
         </span>
       </li>
     </ul>
-    <info-overlay :deviceList="deviceList"></info-overlay>
   </div>
 </template>
 <script>
@@ -37,16 +36,12 @@ export default {
       selectedApplication: {},
       applications: [],
       animating: false,
-      launching: false,
-      deviceList: []
+      launching: false
     };
   },
   mounted() {
     this.loadConfig();
     this.handleGamepadEvents();
-    Event.$on("device-list-updated", data => {
-      this.deviceList = data.devicelist;
-    });
   },
   methods: {
     loadConfig() {

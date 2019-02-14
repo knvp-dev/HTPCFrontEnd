@@ -124,7 +124,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _require = __webpack_require__(/*! electron */ "electron"),
     remote = _require.remote;
 
@@ -135,18 +134,12 @@ var _require = __webpack_require__(/*! electron */ "electron"),
       selectedApplication: {},
       applications: [],
       animating: false,
-      launching: false,
-      deviceList: []
+      launching: false
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
     this.loadConfig();
     this.handleGamepadEvents();
-    Event.$on("device-list-updated", function (data) {
-      _this.deviceList = data.devicelist;
-    });
   },
   methods: {
     loadConfig: function loadConfig() {
@@ -159,29 +152,29 @@ var _require = __webpack_require__(/*! electron */ "electron"),
       });
     },
     handleGamepadEvents: function handleGamepadEvents() {
-      var _this2 = this;
+      var _this = this;
 
       Event.$on("right-pressed", function () {
-        if (!_this2.animating && !_this2.launching) {
-          _this2.animating = true;
-          _this2.position < _this2.applications.length - 1 ? _this2.position++ : _this2.position = 0;
+        if (!_this.animating && !_this.launching) {
+          _this.animating = true;
+          _this.position < _this.applications.length - 1 ? _this.position++ : _this.position = 0;
 
-          _this2.moveCursor();
+          _this.moveCursor();
         }
       });
       Event.$on("left-pressed", function () {
-        if (!_this2.animating && !_this2.launching) {
-          _this2.animating = true;
-          _this2.position > 0 ? _this2.position-- : _this2.position = _this2.applications.length - 1;
+        if (!_this.animating && !_this.launching) {
+          _this.animating = true;
+          _this.position > 0 ? _this.position-- : _this.position = _this.applications.length - 1;
 
-          _this2.moveCursor();
+          _this.moveCursor();
         }
       });
       Event.$on("a-pressed", function () {
-        if (!_this2.animating && !_this2.launching) {
-          _this2.$modal.show("launching");
+        if (!_this.animating && !_this.launching) {
+          _this.$modal.show("launching");
 
-          var that = _this2;
+          var that = _this;
           setTimeout(function () {
             that.LaunchApp();
           }, 500);
@@ -189,13 +182,13 @@ var _require = __webpack_require__(/*! electron */ "electron"),
       });
     },
     moveCursor: function moveCursor() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.selectedApplication = this.applications[this.position];
       $(".app-wrapper.is-selected").removeClass("is-selected");
       $(".app-wrapper").eq(this.position).addClass("is-selected");
       setTimeout(function () {
-        _this3.animating = false;
+        _this2.animating = false;
       }, 200);
     },
     LaunchApp: function LaunchApp() {
@@ -11440,9 +11433,7 @@ var render = function() {
           ])
         }),
         0
-      ),
-      _vm._v(" "),
-      _c("info-overlay", { attrs: { deviceList: _vm.deviceList } })
+      )
     ],
     1
   )
@@ -23703,10 +23694,8 @@ var app = new Vue({
       this.$modal.show("nocontroller");
     },
     handleControllerConnectionChange: function handleControllerConnectionChange() {
-      this.device = this.deviceList.length > 0 ? this.deviceList[0] : [];
-      Event.$emit("device-list-updated", {
-        devicelist: this.deviceList
-      });
+      this.device = this.deviceList.length > 0 ? this.deviceList[0] : []; //Event.$emit("device-list-updated", { devicelist: this.deviceList });
+
       this.deviceList.length == 0 ? this.controllerConnectionLost() : this.setUpController();
     },
     setUpController: function setUpController() {
