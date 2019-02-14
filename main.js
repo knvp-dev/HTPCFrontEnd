@@ -2,12 +2,41 @@ const { app, BrowserWindow } = require("electron");
 let win;
 
 function createWindow() {
-  win = new BrowserWindow({ width: 120, height: 180, frame: false });
+  splash = new BrowserWindow({
+    width: 400,
+    height: 400,
+    transparent: true,
+    frame: false,
+    alwaysOnTop: true,
+    webPreferences: {
+      devTools: false,
+      nodeIntegration: true
+    }
+  });
+  splash.loadFile("app/splash.html");
+
+  win = new BrowserWindow({
+    width: 1920,
+    height: 1080,
+    frame: false,
+    show: false,
+    webPreferences: {
+      devTools: false,
+      nodeIntegration: true
+    }
+  });
   win.setFullScreen(true);
   win.loadFile("app/index.html");
-  win.webContents.openDevTools();
   win.on("closed", () => {
     win = null;
+  });
+
+  // if main window is ready to show, then destroy the splash window and show up the main window
+  win.once("ready-to-show", () => {
+    setTimeout(() => {
+      splash.destroy();
+      win.show();
+    }, 2000);
   });
 }
 

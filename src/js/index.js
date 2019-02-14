@@ -5,7 +5,8 @@ window.ds = require("dualshock");
 import VModal from "vue-js-modal";
 Vue.use(VModal);
 
-Vue.component("applist", require("./components/AppList.vue"));
+Vue.component("applist", require("./components/AppList.vue").default);
+Vue.component("info-overlay", require("./components/InfoOverlay.vue").default);
 
 window.Event = new Vue({});
 
@@ -37,6 +38,7 @@ const app = new Vue({
     },
     handleControllerConnectionChange() {
       this.device = this.deviceList.length > 0 ? this.deviceList[0] : [];
+      Event.$emit("device-list-updated", { devicelist: this.deviceList });
       this.deviceList.length == 0
         ? this.controllerConnectionLost()
         : this.setUpController();
@@ -67,6 +69,9 @@ const app = new Vue({
               break;
             case "a":
               Event.$emit("a-pressed");
+              break;
+            case "x":
+              Event.$emit("x-pressed");
               break;
           }
         }

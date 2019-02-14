@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Fredoka+One");
+@import url("https://fonts.googleapis.com/css?family=Baumans");
+* {
+  font-family: "Baumans", cursive;
+}
 
 .v--modal {
   border-radius: 25px !important;
@@ -10,8 +14,8 @@
   z-index: 99999999999 !important;
 }
 
-.launching-modal {
-  font-family: "Fredoka One", cursive;
+.info-modal {
+  font-family: "Baumans", cursive;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,13 +1,13 @@
 <template>
   <div>
     <modal name="nocontroller" width="500" height="130">
-      <div class="loading-modal">
+      <div class="info-modal">
         <i class="fas fa-gamepad"></i>
         <span>No controller detected...</span>
       </div>
     </modal>
     <modal name="launching" width="500" height="130">
-      <div class="launching-modal">
+      <div class="info-modal">
         <i class="fas fa-spin fa-cog"></i>
         <span>Launching {{ selectedApplication.name }} ...</span>
       </div>
@@ -25,6 +25,7 @@
         </span>
       </li>
     </ul>
+    <info-overlay :deviceList="deviceList"></info-overlay>
   </div>
 </template>
 <script>
@@ -36,12 +37,16 @@ export default {
       selectedApplication: {},
       applications: [],
       animating: false,
-      launching: false
+      launching: false,
+      deviceList: []
     };
   },
   mounted() {
     this.loadConfig();
     this.handleGamepadEvents();
+    Event.$on("device-list-updated", data => {
+      this.deviceList = data.devicelist;
+    });
   },
   methods: {
     loadConfig() {
@@ -57,7 +62,7 @@ export default {
     },
     handleGamepadEvents() {
       Event.$on("right-pressed", () => {
-        if (!this.animating) {
+        if (!this.animating && !this.launching) {
           this.animating = true;
           this.position < this.applications.length - 1
             ? this.position++
@@ -67,7 +72,7 @@ export default {
       });
 
       Event.$on("left-pressed", () => {
-        if (!this.animating) {
+        if (!this.animating && !this.launching) {
           this.animating = true;
           this.position > 0
             ? this.position--
@@ -77,11 +82,13 @@ export default {
       });
 
       Event.$on("a-pressed", () => {
-        this.$modal.show("launching");
-        let that = this;
-        setTimeout(function() {
-          that.LaunchApp();
-        }, 500);
+        if (!this.animating && !this.launching) {
+          this.$modal.show("launching");
+          let that = this;
+          setTimeout(function() {
+            that.LaunchApp();
+          }, 500);
+        }
       });
     },
     moveCursor() {
@@ -104,19 +111,15 @@ export default {
             ? require("child_process").execFile
             : require("child_process").exec;
 
-        child(executablePath, function(err, data) {
-          err ? console.error(err) : that.appLaunched();
-        }).on("close", () => {
+        child(executablePath, function(err, data) {}).on("close", () => {
           that.appShutdown();
         });
       }
     },
     appShutdown() {
-      remote.getCurrentWindow().focus();
-    },
-    appLaunched() {
       this.$modal.hide("launching");
       this.launching = false;
+      remote.getCurrentWindow().focus();
     }
   }
 };
@@ -167,7 +170,7 @@ li {
   align-items: center;
   width: 100vw;
   background-color: #ffffffad;
-  padding: 50px 0;
+  padding: 40px 0;
   border-top-right-radius: 125px;
   border-bottom-right-radius: 125px;
 }
@@ -187,5 +190,6 @@ li {
 .app-item img {
   width: 50%;
   z-index: 9999;
+  margin-left: -30px;
 }
 </style>

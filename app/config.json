@@ -28,7 +28,7 @@
       {
         "name": "Netflix",
         "slug": "netflix",
-        "path": "",
+        "path": "C:\\Program Files (x86)\\Notepad++\\Notepad++.exe",
         "background": "bg.jpg",
         "banner_color": "#ffffffad",
         "logo": "netflix-official.svg"
