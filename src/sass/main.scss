@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One");
+
+.v--modal {
+  border-radius: 25px !important;
+  background-color: #ffffffad !important;
+}
+
+.v--modal-overlay {
+  background: rgba(0, 0, 0, 0.83) !important;
+  z-index: 99999999999 !important;
+}
+
+.launching-modal {
+  font-family: "Fredoka One", cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+
+  > i {
+    font-size: 2em;
+    color: #292929;
+    margin: 20px;
+  }
+
+  > span {
+    font-size: 1.3em;
+    color: #292929;
+    text-transform: uppercase;
+  }
+}

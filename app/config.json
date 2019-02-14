@@ -1,0 +1,46 @@
+[
+  {
+    "applications": [
+      {
+        "name": "Steam",
+        "slug": "steam",
+        "path": "C:\\Program Files (x86)\\Steam\\Steam.exe",
+        "background": "bg.jpg",
+        "banner_color": "#ffffffad",
+        "logo": "logo.png"
+      },
+      {
+        "name": "BigBox",
+        "slug": "bigbox",
+        "path": "C:\\Users\\Kenny\\LaunchBox\\BigBox.exe",
+        "background": "bg.jpg",
+        "banner_color": "#ffffffad",
+        "logo": "bigbox.png"
+      },
+      {
+        "name": "Plex",
+        "slug": "plex",
+        "path": "C:\\Program Files\\Plex\\Plex Media Player\\PlexMediaPlayer.exe",
+        "background": "bg.jpg",
+        "banner_color": "#ffffffad",
+        "logo": "logo.png"
+      },
+      {
+        "name": "Netflix",
+        "slug": "netflix",
+        "path": "",
+        "background": "bg.jpg",
+        "banner_color": "#ffffffad",
+        "logo": "netflix-official.svg"
+      },
+      {
+        "name": "Spotify",
+        "slug": "spotify",
+        "path": "C:\\Users\\Kenny\\AppData\\Roaming\\Spotify\\Spotify.exe",
+        "background": "bg.jpg",
+        "banner_color": "#000000ad",
+        "logo": "logo.svg"
+      }
+    ]
+  }
+]
