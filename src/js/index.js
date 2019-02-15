@@ -5,7 +5,7 @@ window.ds = require("dualshock");
 import VModal from "vue-js-modal";
 Vue.use(VModal);
 
-Vue.component("applist", require("./components/AppList.vue").default);
+Vue.component("app-carousel", require("./components/AppCarousel.vue").default);
 Vue.component("info-overlay", require("./components/InfoOverlay.vue").default);
 
 window.Event = new Vue({});

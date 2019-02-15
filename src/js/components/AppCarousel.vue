@@ -79,10 +79,7 @@ export default {
       Event.$on("a-pressed", () => {
         if (!this.animating && !this.launching) {
           this.$modal.show("launching");
-          let that = this;
-          setTimeout(function() {
-            that.LaunchApp();
-          }, 500);
+          that.LaunchApp();
         }
       });
     },

@@ -13,6 +13,7 @@ function createWindow() {
       nodeIntegration: true
     }
   });
+
   splash.loadFile("app/splash.html");
 
   win = new BrowserWindow({
@@ -25,8 +26,10 @@ function createWindow() {
       nodeIntegration: true
     }
   });
+
   win.setFullScreen(false);
   win.loadFile("app/index.html");
+
   win.on("closed", () => {
     win = null;
   });
